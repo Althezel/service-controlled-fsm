@@ -1,0 +1,15 @@
+C:\Users\logan\Documents\Repos\CS\fsm\bin\Debug\net6.0\fsm.exe
+C:\Users\logan\Documents\Repos\CS\fsm\bin\Debug\net6.0\fsm.deps.json
+C:\Users\logan\Documents\Repos\CS\fsm\bin\Debug\net6.0\fsm.runtimeconfig.json
+C:\Users\logan\Documents\Repos\CS\fsm\bin\Debug\net6.0\fsm.dll
+C:\Users\logan\Documents\Repos\CS\fsm\bin\Debug\net6.0\fsm.pdb
+C:\Users\logan\Documents\Repos\CS\fsm\obj\Debug\net6.0\fsm.csproj.AssemblyReference.cache
+C:\Users\logan\Documents\Repos\CS\fsm\obj\Debug\net6.0\fsm.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\logan\Documents\Repos\CS\fsm\obj\Debug\net6.0\fsm.AssemblyInfoInputs.cache
+C:\Users\logan\Documents\Repos\CS\fsm\obj\Debug\net6.0\fsm.AssemblyInfo.cs
+C:\Users\logan\Documents\Repos\CS\fsm\obj\Debug\net6.0\fsm.csproj.CoreCompileInputs.cache
+C:\Users\logan\Documents\Repos\CS\fsm\obj\Debug\net6.0\fsm.dll
+C:\Users\logan\Documents\Repos\CS\fsm\obj\Debug\net6.0\refint\fsm.dll
+C:\Users\logan\Documents\Repos\CS\fsm\obj\Debug\net6.0\fsm.pdb
+C:\Users\logan\Documents\Repos\CS\fsm\obj\Debug\net6.0\fsm.genruntimeconfig.cache
+C:\Users\logan\Documents\Repos\CS\fsm\obj\Debug\net6.0\ref\fsm.dll
