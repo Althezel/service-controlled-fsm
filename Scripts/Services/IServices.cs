@@ -1,4 +1,4 @@
 public interface IService
 {
-    public abstract IResponse ProcessRequest(IRequest request);
+    public abstract IResponse? ProcessRequest(IRequest request);
 }

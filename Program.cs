@@ -4,20 +4,20 @@
     {
         static void Main(string[] args)
         {
-            EntityAction[] testActions = new EntityAction[] {
-                EntityAction.MoveEast,
-                EntityAction.MoveNorth,
-                EntityAction.MoveWest,
-                EntityAction.MoveSouth
-            };
-
             MoveableEntity e = new MoveableEntity(
-                new EntityStateMachine(new EntityInactiveState()),
-                new Location(0, 0, Rotation.North),
-                testActions
+                new EntityStateMachine(),
+                new Location(0, 0, Rotation.North)
             );
 
-            e.ProcessActions();
+            e.HandleInput(EntityAction.MoveEast);
+
+            int count = 10;
+
+            while(count > 0)
+            {
+                e.Update();
+                count--;
+            }
         }
     }
 }

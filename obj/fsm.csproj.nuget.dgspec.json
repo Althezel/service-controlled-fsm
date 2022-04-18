@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\logan\\Documents\\Repos\\CS\\fsm\\fsm.csproj": {}
+    "C:\\Users\\logan\\Documents\\Repos\\CS\\service-controlled-fsm\\fsm.csproj": {}
   },
   "projects": {
-    "C:\\Users\\logan\\Documents\\Repos\\CS\\fsm\\fsm.csproj": {
+    "C:\\Users\\logan\\Documents\\Repos\\CS\\service-controlled-fsm\\fsm.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\logan\\Documents\\Repos\\CS\\fsm\\fsm.csproj",
+        "projectUniqueName": "C:\\Users\\logan\\Documents\\Repos\\CS\\service-controlled-fsm\\fsm.csproj",
         "projectName": "fsm",
-        "projectPath": "C:\\Users\\logan\\Documents\\Repos\\CS\\fsm\\fsm.csproj",
+        "projectPath": "C:\\Users\\logan\\Documents\\Repos\\CS\\service-controlled-fsm\\fsm.csproj",
         "packagesPath": "C:\\Users\\logan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\logan\\Documents\\Repos\\CS\\fsm\\obj\\",
+        "outputPath": "C:\\Users\\logan\\Documents\\Repos\\CS\\service-controlled-fsm\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\logan\\AppData\\Roaming\\NuGet\\NuGet.Config"

@@ -1,13 +1,26 @@
-public interface IResponse {}
+public interface IResponse
+{
+    public IState NextState { get; }
+}
 
 public struct MovementResponse : IResponse
 {
-    public MovementResponse(bool allow, Location nextLocation)
+    public IState NextState { get; }
+    public Location NextLocation { get; }
+
+    public MovementResponse(Location nextLocation, IState nextState)
     {
-        Allow = allow;
+        NextState = nextState;
         NextLocation = nextLocation;
     }
+}
 
-    public bool Allow { get; }
-    public Location NextLocation { get; }
+public struct InactiveResponse : IResponse
+{
+    public IState NextState { get; }
+
+    public InactiveResponse(IState nextState)
+    {
+        NextState = nextState;
+    }
 }

@@ -8,7 +8,7 @@ public class MovementService : IService
         Map[0,0] = 1;
     }
 
-    public IResponse ProcessRequest(IRequest request)
+    public IResponse? ProcessRequest(IRequest request)
     {
         if (request is MovementRequest r)
         {
@@ -44,33 +44,27 @@ public class MovementService : IService
             ) {
                 Map[currentX, currentY] = 0;
                 Map[requestedX, requestedY] = 1;
+                
                 return new MovementResponse(
-                    true,
                     new Location(
                         requestedX,
                         requestedY,
                         r.CurrentLocation.R
-                    )
+                    ),
+                    r.NextState
                 );
             } else {
                 return new MovementResponse(
-                    false,
                     new Location(
                         r.CurrentLocation.X,
                         r.CurrentLocation.Y,
                         r.CurrentLocation.R
-                    )
+                    ),
+                    r.NextState
                 );
             }
         } else {
-            return new MovementResponse(
-                false,
-                new Location(
-                    0,
-                    0,
-                    Rotation.North
-                )
-            );
+            return null;
         }
     }
 }

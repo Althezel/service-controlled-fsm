@@ -1,50 +1,128 @@
 public class MoveableEntity : IEntity<EntityAction>
 {
+    private IState currentState;
+
     public IStateMachine<EntityAction> FSM { get; set; }
     public Location Location { get; set; }
-    public EntityAction[] Actions;
+    public Queue<EntityAction> Actions = new Queue<EntityAction>();
+    public IState CurrentState
+    { 
+        get
+        {
+            return currentState;
+        }
 
-    public MoveableEntity(IStateMachine<EntityAction> fsm, Location location, EntityAction[] actions)
+        set
+        {
+            currentState.Exit();
+            currentState = value;
+            currentState.Enter();
+        } 
+    }
+
+    public MoveableEntity(IStateMachine<EntityAction> fsm, Location location)
     {
         FSM = fsm;
         Location = location;
-        Actions = actions;
+        currentState = new EntityInactiveState();
+        currentState.Enter();
     }
 
-    public void RotateEntity(EntityAction action)
+    public void Update()
     {
+        CurrentState.Update();
+        if (Actions.Count > 0)
+        {
+            SendRequest(Actions.Dequeue());
+        }
+    }
+
+    public void SendRequest(EntityAction action)
+    {
+        IResponse? response = null;
+
         switch (action)
         {
             case EntityAction.MoveNorth:
-                Location = new Location(Location.X, Location.Y, Rotation.North);
+                response = FSM.ProcessAction(
+                    action,
+                    new MovementRequest(
+                        new Location(
+                            Location.X,
+                            Location.Y,
+                            Rotation.North
+                        ),
+                        FSM.GetNextState(CurrentState, action)
+                    ));
                 break;
             case EntityAction.MoveEast:
-                Location = new Location(Location.X, Location.Y, Rotation.East);
+                response = FSM.ProcessAction(
+                    action,
+                    new MovementRequest(
+                        new Location(
+                            Location.X,
+                            Location.Y,
+                            Rotation.East
+                        ),
+                        FSM.GetNextState(CurrentState, action)
+                    ));
                 break;
             case EntityAction.MoveSouth:
-                Location = new Location(Location.X, Location.Y, Rotation.South);
+                response = FSM.ProcessAction(
+                    action,
+                    new MovementRequest(
+                        new Location(
+                            Location.X,
+                            Location.Y,
+                            Rotation.South
+                        ),
+                        FSM.GetNextState(CurrentState, action)
+                    ));
                 break;
             case EntityAction.MoveWest:
-                Location = new Location(Location.X, Location.Y, Rotation.West);
+                response = FSM.ProcessAction(
+                    action,
+                    new MovementRequest(
+                        new Location(
+                            Location.X,
+                            Location.Y,
+                            Rotation.West
+                        ),
+                        FSM.GetNextState(CurrentState, action)
+                    ));
+                break;
+            case EntityAction.Inactive:
+                response = FSM.ProcessAction(
+                    action,
+                    new InactiveRequest(
+                        FSM.GetNextState(CurrentState, action)
+                    )
+                );
                 break;
             default:
                 break;
         }
+
+        if (response != null)
+        {
+            ProcessResponse(response);
+        }
     }
 
-    public void ProcessActions()
+    public void ProcessResponse(IResponse response)
     {
-        foreach (EntityAction action in Actions)
-        {
-            RotateEntity(action);
-            IResponse? response = FSM.ProcessAction(action, new MovementRequest(Location));
+        CurrentState = response.NextState;
 
-            if (response is MovementResponse res && res.Allow)
-            {
-                Location = new Location(res.NextLocation.X, res.NextLocation.Y, res.NextLocation.R);
-                // Console.WriteLine($"X: {Location.X}, Y: {Location.Y}, R: {Location.RKey()}");
-                FSM.ProcessAction(EntityAction.Inactive, null);
-            }
+        if (response is MovementResponse moveResponse)
+        {
+            Actions.Enqueue(EntityAction.Inactive);
+            Location = new Location(moveResponse.NextLocation.X, moveResponse.NextLocation.Y, moveResponse.NextLocation.R);
+            // Console.WriteLine($"X: {Location.X}, Y: {Location.Y}, R: {Location.RKey()}");
         }
+    }
+
+    public void HandleInput(EntityAction input)
+    {
+        Actions.Enqueue(input);
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Spn2QlBR/2zgXzqkG3gXOOQiWjPmfDDCjmeTQoVyLEIAFpB0Nwtvh3KM0oIM30iQA5/dAmzOf7vxGq/WblesDQ==",
+  "dgSpecHash": "RMd+0DdJK527aTNT0yYraudDBchotmtou1eaeZ/gkmDb8iAsy3jEb9zZLH6xvSMTHW3xkyVX9TvghI4gaYdilw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\logan\\Documents\\Repos\\CS\\fsm\\fsm.csproj",
+  "projectFilePath": "C:\\Users\\logan\\Documents\\Repos\\CS\\service-controlled-fsm\\fsm.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

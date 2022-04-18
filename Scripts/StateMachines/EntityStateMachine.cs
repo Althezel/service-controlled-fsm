@@ -10,26 +10,10 @@ public enum EntityAction
 public class EntityStateMachine : IStateMachine<EntityAction>
 {
     private MovementService MService = new MovementService();
-    private IState currentState;
-    public IState CurrentState
-    {
-        get { return currentState; }
-    }
 
-    public void SetState(IState state)
-    {
-        currentState.Exit();
-        currentState = state;
-        currentState.Enter();
-    }
+    public EntityStateMachine() {}
 
-    public EntityStateMachine(IState startingState)
-    {
-        currentState = startingState;
-        currentState.Enter();
-    }
-
-    public IResponse? ProcessAction(EntityAction action, IRequest? request)
+    public IResponse? ProcessAction(EntityAction action, IRequest request)
     {
         switch (action)
         {            
@@ -39,31 +23,23 @@ public class EntityStateMachine : IStateMachine<EntityAction>
             case EntityAction.MoveWest:
                 if (request is MovementRequest req)
                 {
-                    IResponse response = MService.ProcessRequest(req);
+                    IResponse? response = MService.ProcessRequest(req);
 
                     if (response is MovementResponse res)
                     {
-                        if (res.Allow)
-                        {
-                            SetState(ChangeState(currentState, action));
-                            currentState.Update();
-                        }
-
                         return res;
                     }
                 }
                 
                 return null;
             case EntityAction.Inactive:
-                SetState(ChangeState(currentState, action));
-                currentState.Update();
-                return null;
+                return new InactiveResponse(request.NextState);
             default:
                 return null;
         }
     }
 
-    public IState ChangeState(IState current, EntityAction action) =>
+    public IState GetNextState(IState current, EntityAction action) =>
         (current, action) switch
         {
             (EntityInactiveState, EntityAction.MoveNorth)   => new EntityMoveNorthState(),
